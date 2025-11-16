@@ -1,2 +1,6 @@
-__pycache__
+__pycache__/
+*.pyc
+.venv/
+.env
 game_state.jsonl
+game_events.jsonl
