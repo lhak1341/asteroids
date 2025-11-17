@@ -37,13 +37,24 @@ def main():
         dt = clock.tick(FPS) / 1000.0
         updatable.update(dt)
 
-        for a in asteroids:
+        for a in list(asteroids):
             if a.collides_with(player):
                 log_event("player_hit")
                 print("Game over!")
-                # sys.exit()
                 running = False
                 break
+
+            hit = False
+            for s in list(shots):
+                if a.collides_with(s):
+                    log_event("asteroid_shot")
+                    a.split()
+                    s.kill()
+                    hit = True
+                    break
+            if hit:
+                # optionally break to skip checking other asteroids this frame
+                continue
 
         screen.fill("black")
         for d in drawable:
